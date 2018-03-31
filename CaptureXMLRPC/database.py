@@ -97,6 +97,7 @@ class Database(object):
         cursor.execute("""
         SELECT * FROM session WHERE session_id = '{session_id}'
         """.format(session_id=session_id))
+
         session = cursor.fetchone()
         cursor.close()
         if session and len(session) > 0 and session[4] > timestamp:
@@ -127,3 +128,16 @@ class Database(object):
         except Exception as e:
             raise e
         return False
+
+    # database helper class
+    def get_session(self, project_code, unit_code):
+        cursor = self.conn.cursor()
+        cursor.execute("""
+        SELECT session_id FROM session WHERE project_code = '{project_code}' AND unit_code = '{unit_code}'
+        """.format(project_code=project_code, unit_code=unit_code))
+        session_id = cursor.fetchone()
+        cursor.close()
+        return session_id[0]
+
+    def get_suite(self):
+        pass

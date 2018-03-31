@@ -1,6 +1,7 @@
-/sqlite_test/
-/CaptureXMLRPC/sqlite/
 /.vscode/
 /CaptureXMLRPC/.vscode/
 nb-configuration.xml
 /.idea/
+*/__pycache__/
+/__pycache__/
+*.pyc

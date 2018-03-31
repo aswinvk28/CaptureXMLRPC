@@ -23,7 +23,7 @@ class Session():
         self.database.expire_session(session_id)
         return True
 
-    def obtainSession(self, refresh, project_code, unit_code, expiry_timestamp=None, session_id=None):
+    def obtainSession(self, refresh, project_code, unit_code, expiry_timestamp, session_id):
         cursor = self.db.cursor()
         if not refresh:
             try:

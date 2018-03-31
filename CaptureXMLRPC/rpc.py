@@ -1,15 +1,20 @@
-from flask import Flask
 from xmlrpc.server import SimpleXMLRPCServer, SimpleXMLRPCRequestHandler
-from .database import Database
-from . import session
-from . import request
+from . import database
+from .api import api
+
+PORT = 8080
+HOST = '192.168.56.102'
 
 class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/XmlRpcService')
 
-server = SimpleXMLRPCServer(('127.0.0.1', 8000), requestHandler=RequestHandler)
+server = SimpleXMLRPCServer((HOST, PORT), requestHandler=RequestHandler)
+server.register_introspection_functions()
 
-server.register_instance(session.Session())
-server.register_instance(request.Request())
+db = database.Database(db_file='sqlite_test/application.db')
+server.register_instance(api.Api(database=db))
+
+print("The server is running at Port: " + PORT.__str__() + 
+", Host: " + HOST.__str__())
 
 server.serve_forever()
