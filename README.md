@@ -1,4 +1,4 @@
-# CaptureXMLRPC
+# CaptureXMLRPC (Enscalo)
 Python based XMLRPC Server providing interfaces to captureGUI
 
 ### Purpose of the Backend
